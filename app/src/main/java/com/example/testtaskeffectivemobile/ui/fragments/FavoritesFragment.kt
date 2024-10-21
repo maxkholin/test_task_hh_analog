@@ -1,4 +1,4 @@
-package com.example.testtaskeffectivemobile.fragments
+package com.example.testtaskeffectivemobile.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

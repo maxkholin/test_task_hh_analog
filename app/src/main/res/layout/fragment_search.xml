@@ -5,24 +5,24 @@
     android:id="@+id/searchFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.SearchFragment">
+    android:layout_marginHorizontal="16dp"
+    tools:context=".ui.fragments.SearchFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/search_input_layout"
             android:layout_width="0dp"
             android:layout_height="54dp"
             android:layout_marginEnd="8dp"
+            android:enabled="false"
+
             android:hint="@string/search_hint"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/filter_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:enabled="false"
             app:startIconDrawable="@drawable/ic_search_unselected">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -41,6 +41,17 @@
             android:src="@drawable/ic_filter_button"
             app:layout_constraintBottom_toBottomOf="@id/search_input_layout"
             app:layout_constraintEnd_toEndOf="parent" />
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/offersRecyclerView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:clipToPadding="false"-->
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--            app:orientation="horizontal"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/search_input_layout" />-->
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
