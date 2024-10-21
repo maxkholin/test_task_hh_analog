@@ -1,19 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/searchFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/searchFragment"
     tools:context=".fragments.SearchFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="16dp"
-        android:text="@string/responses"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/search_input_layout"
+            android:layout_width="0dp"
+            android:layout_height="54dp"
+            android:layout_marginEnd="8dp"
+            android:hint="@string/search_hint"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/filter_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:enabled="false"
+            app:startIconDrawable="@drawable/ic_search_unselected">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/search_input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_background"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageButton
+            android:id="@+id/filter_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_filter_button"
+            app:layout_constraintBottom_toBottomOf="@id/search_input_layout"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

@@ -42,9 +42,10 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation (libs.material)
     // Navigation Component
-    implementation (libs.androidx.navigation.fragment.ktx)
-    implementation (libs.androidx.navigation.ui.ktx)
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.1")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.7.1")
     // Material Components
     implementation (libs.material.v190)
     // ViewModel and LiveData
