@@ -2,4 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dark_gray_elements_background">#313234</color>
+    <color name="special_blue_menu_icons_selected">#2B7EFE</color>
 </resources>
