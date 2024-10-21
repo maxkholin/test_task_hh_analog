@@ -7,31 +7,31 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.testtaskeffectivemobile.fragments.SearchFragment"
+        android:name="com.example.testtaskeffectivemobile.ui.fragments.SearchFragment"
         android:label="@string/search"
         tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.example.testtaskeffectivemobile.fragments.FavoritesFragment"
+        android:name="com.example.testtaskeffectivemobile.ui.fragments.FavoritesFragment"
         android:label="@string/favorites"
         tools:layout="@layout/fragment_favorites" />
 
     <fragment
         android:id="@+id/responsesFragment"
-        android:name="com.example.testtaskeffectivemobile.fragments.ResponsesFragment"
+        android:name="com.example.testtaskeffectivemobile.ui.fragments.ResponsesFragment"
         android:label="@string/responses"
         tools:layout="@layout/fragment_responses" />
 
     <fragment
         android:id="@+id/messagesFragment"
-        android:name="com.example.testtaskeffectivemobile.fragments.MessagesFragment"
+        android:name="com.example.testtaskeffectivemobile.ui.fragments.MessagesFragment"
         android:label="@string/messages"
         tools:layout="@layout/fragment_messages" />
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.testtaskeffectivemobile.fragments.ProfileFragment"
+        android:name="com.example.testtaskeffectivemobile.ui.fragments.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
 
