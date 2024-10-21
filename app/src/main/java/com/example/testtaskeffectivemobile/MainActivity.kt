@@ -1,17 +1,16 @@
 package com.example.testtaskeffectivemobile
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
-
+import com.example.testtaskeffectivemobile.data.api.RetrofitClient
+import com.example.testtaskeffectivemobile.data.model.Offer
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
