@@ -2,7 +2,7 @@ package com.example.testtaskeffectivemobile.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Vacancies(
+data class Vacancy(
     @SerializedName("id") val id: String?,
     @SerializedName("lookingNumber") val lookingNumber: Int?,
     @SerializedName("title") val title: String?,
