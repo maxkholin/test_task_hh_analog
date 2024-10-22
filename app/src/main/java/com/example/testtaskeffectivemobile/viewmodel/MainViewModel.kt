@@ -12,14 +12,17 @@ import com.example.testtaskeffectivemobile.data.model.Offer
 import com.example.testtaskeffectivemobile.data.model.Vacancy
 import kotlinx.coroutines.launch
 
-private const val TAG = "SearchViewModel"
+private const val TAG = "MainViewModel"
 
-class SearchViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> = _errorMessage
 
     private val _moreVacanciesButtonText = MutableLiveData<String?>()
     val moreVacanciesButtonText: LiveData<String?> = _moreVacanciesButtonText
+
+    private val _vacanciesCount = MutableLiveData<String?>()
+    val vacanciesCount: LiveData<String?> = _vacanciesCount
 
     private val _offers = MutableLiveData<List<Offer>>()
     val offers: LiveData<List<Offer>> = _offers
@@ -38,9 +41,16 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
                 val serverResponse = RetrofitClient.instance.loadData()
                 _offers.postValue(serverResponse.offers)
                 _vacancies.postValue(serverResponse.vacancies)
-                _moreVacanciesButtonText.postValue(parseVacanciesCount(serverResponse.vacancies.size))
+
+                _moreVacanciesButtonText
+                    .postValue("Ещё ${parseVacanciesCount(serverResponse.vacancies.size)}")
+
+                _vacanciesCount.postValue(parseVacanciesCount(serverResponse.vacancies.size))
+
             } catch (e: Exception) {
-                _errorMessage.postValue(getApplication<Application>().getString(R.string.error_loading))
+                _errorMessage
+                    .postValue(getApplication<Application>().getString(R.string.error_loading))
+
                 Log.d(TAG, e.toString())
             }
         }
@@ -53,6 +63,6 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
             else -> "вакансий"
         }
 
-        return "Ещё $size $wordForm"
+        return "$size $wordForm"
     }
 }
