@@ -20,11 +20,9 @@ data class Vacancy(
     @SerializedName("isFavorite") var isFavorite: Boolean,
     @Embedded
     @SerializedName("salary") val salary: Salary?,
-    // @SerializedName("schedules") val schedules: List<String>,
     @SerializedName("appliedNumber") val appliedNumber: Int?,
     @SerializedName("description") val description: String?,
     @SerializedName("responsibilities") val responsibilities: String?,
-    // @SerializedName("questions") val questions: List<String>
 )
 
 data class Address(
