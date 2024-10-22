@@ -10,7 +10,7 @@ data class Vacancy(
     @SerializedName("company") val company: String?,
     @SerializedName("experience") val experience: Experience?,
     @SerializedName("publishedDate") val publishedDate: String?,
-    @SerializedName("isFavorite") var isFavorite: Boolean?,
+    @SerializedName("isFavorite") var isFavorite: Boolean,
     @SerializedName("salary") val salary: Salary?,
     @SerializedName("schedules") val schedules: List<String>,
     @SerializedName("appliedNumber") val appliedNumber: Int?,

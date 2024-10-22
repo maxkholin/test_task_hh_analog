@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
@@ -29,25 +28,23 @@ class MatchingVacanciesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_matching_vacancies, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Инициализация ViewModel
+        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
         // Настройка RecyclerView для вакансий
         vacancyRecyclerView = view.findViewById(R.id.vacanciesRecyclerView)
-        vacancyAdapter = VacancyAdapter()
+        vacancyAdapter = VacancyAdapter(mainViewModel)
         vacancyRecyclerView.adapter = vacancyAdapter
-
-        // Инициализация ViewModel, общая для Activity
-        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
 
         // Инициализация, установка текста кнопки
-        vacanciesCount = view.findViewById(R.id.vacanciesCount)
+        vacanciesCount = view.findViewById(R.id.title)
 
         mainViewModel.vacanciesCount.observe(viewLifecycleOwner) { text ->
             vacanciesCount.text = text
@@ -64,7 +61,6 @@ class MatchingVacanciesFragment : Fragment() {
         mainViewModel.vacancies.observe(viewLifecycleOwner) { vacancies ->
             vacancyAdapter.vacancies = vacancies
         }
-
 
     }
 }

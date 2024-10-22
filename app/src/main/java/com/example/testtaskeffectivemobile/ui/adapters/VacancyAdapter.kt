@@ -8,10 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testtaskeffectivemobile.R
 import com.example.testtaskeffectivemobile.data.model.Vacancy
+import com.example.testtaskeffectivemobile.viewmodel.MainViewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class VacancyAdapter() :
+class VacancyAdapter(private val viewModel: MainViewModel) :
     RecyclerView.Adapter<VacancyAdapter.VacancyViewHolder>() {
 
     class VacancyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -25,10 +26,6 @@ class VacancyAdapter() :
         val favoriteButton = itemView.findViewById<ImageView>(R.id.favoriteButton)
     }
 
-    interface OnFavoriteButtonClickListener {
-        fun onFavoriteButtonClick()
-    }
-
     private var _vacancies = listOf<Vacancy>()
     var vacancies: List<Vacancy>
         get() = _vacancies
@@ -36,12 +33,6 @@ class VacancyAdapter() :
             _vacancies = value
             notifyDataSetChanged()
         }
-
-//    var onFavoriteButtonClickListener: OnFavoriteButtonClickListener? = null
-//
-//    fun setOnFavoriteButtonClickListener(onFavoriteButtonClickListener: OnFavoriteButtonClickListener) {
-//        this.onFavoriteButtonClickListener = onFavoriteButtonClickListener
-//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VacancyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
@@ -74,12 +65,12 @@ class VacancyAdapter() :
             dateTextView.text = date
 
             favoriteButton.setImageResource(
-                if (vacancy.isFavorite == true) R.drawable.ic_favorite_selected
+                if (vacancy.isFavorite) R.drawable.ic_favorite_selected
                 else R.drawable.ic_favorite_unselected
             )
 
 //            favoriteButton.setOnClickListener {
-//                onFavoriteButtonClickListener?.onFavoriteButtonClick()
+//                viewModel.onClickFavorite(vacancy)
 //            }
         }
     }

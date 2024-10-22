@@ -36,12 +36,15 @@ class MainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Инициализация ViewModel, общая для Activity
+        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
+        mainViewModel.loadData()
 
         // Настройка RecyclerView для офферов
         offersRecyclerView = view.findViewById(R.id.offersRecyclerView)
@@ -50,12 +53,8 @@ class MainFragment : Fragment() {
 
         // Настройка RecyclerView для вакансий
         vacancyRecyclerView = view.findViewById(R.id.vacanciesRecyclerView)
-        vacancyAdapter = VacancyAdapter()
+        vacancyAdapter = VacancyAdapter(mainViewModel)
         vacancyRecyclerView.adapter = vacancyAdapter
-
-        // Инициализация ViewModel, общая для Activity
-        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-        mainViewModel.loadData()
 
         // Инициализация, установка текста кнопки, слушателя клика
         moreVacanciesButton = view.findViewById(R.id.moreVacanciesButton)

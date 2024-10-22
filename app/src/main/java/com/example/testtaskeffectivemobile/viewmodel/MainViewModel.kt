@@ -30,6 +30,26 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _vacancies = MutableLiveData<List<Vacancy>>()
     val vacancies: LiveData<List<Vacancy>> = _vacancies
 
+    private val _favoriteVacancies = MutableLiveData<List<Vacancy>>()
+    val favoriteVacancies: LiveData<List<Vacancy>> = _favoriteVacancies
+
+    private val _favoriteVacanciesCount = MutableLiveData<String?>()
+    val favoriteVacanciesCount: LiveData<String?> = _favoriteVacanciesCount
+
+//    fun onClickFavorite(vacancy: Vacancy) {
+//        val updatedVacancies = _vacancies.value?.map {
+//            if (it.id == vacancy.id) {
+//                it.copy(isFavorite = !it.isFavorite)
+//            } else {
+//                it
+//            }
+//        } ?: emptyList()
+//        _vacancies.postValue(updatedVacancies)
+//        _favoriteVacancies.postValue(updatedVacancies.filter { it.isFavorite })
+//
+//        val count = _favoriteVacancies.value?.size?.let { parseVacanciesCount(it) }
+//        _favoriteVacanciesCount.postValue(count)
+//    }
 
     fun errorHandled() {
         _errorMessage.value = null
@@ -46,6 +66,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     .postValue("Ещё ${parseVacanciesCount(serverResponse.vacancies.size)}")
 
                 _vacanciesCount.postValue(parseVacanciesCount(serverResponse.vacancies.size))
+
+                val favoriteVacanciesCount = parseVacanciesCount(
+                    serverResponse.vacancies.filter { it.isFavorite }.size
+                )
+                _favoriteVacanciesCount.postValue(favoriteVacanciesCount)
 
             } catch (e: Exception) {
                 _errorMessage
