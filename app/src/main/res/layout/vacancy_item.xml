@@ -15,6 +15,7 @@
         android:padding="16dp">
 
         <ImageView
+            android:id="@+id/favoriteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
@@ -23,7 +24,7 @@
             tools:src="@drawable/ic_favorite_selected" />
 
         <TextView
-            android:id="@+id/peopleWatchingTextView"
+            android:id="@+id/peopleLookingTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/green_offer_icon_background"
@@ -40,7 +41,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/peopleWatchingTextView"
+            app:layout_constraintTop_toBottomOf="@id/peopleLookingTextView"
             tools:text="Название вакансии" />
 
         <TextView
@@ -73,7 +74,7 @@
             android:src="@drawable/company_check"
             app:layout_constraintBottom_toBottomOf="@id/companyTextView"
             app:layout_constraintStart_toEndOf="@id/companyTextView"
-            app:layout_constraintTop_toTopOf="@id/companyTextView"
+            app:layout_constraintTop_toTopOf="@id/companyTextView"/>
 
         <TextView
             android:id="@+id/experienceTextView"
