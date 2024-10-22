@@ -112,7 +112,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-
     private fun parseVacanciesCount(size: Int): String {
         val wordForm = when {
             size % 10 == 1 && size % 100 != 11 -> "вакансия"
