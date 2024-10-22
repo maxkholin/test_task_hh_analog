@@ -10,14 +10,16 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testtaskeffectivemobile.R
 import com.example.testtaskeffectivemobile.data.model.Offer
 import com.example.testtaskeffectivemobile.ui.adapters.OfferAdapter
 import com.example.testtaskeffectivemobile.ui.adapters.VacancyAdapter
-import com.example.testtaskeffectivemobile.viewmodel.SearchViewModel
+import com.example.testtaskeffectivemobile.viewmodel.MainViewModel
 
-class SearchFragment : Fragment() {
+class MainFragment : Fragment() {
 
     private lateinit var offersRecyclerView: RecyclerView
     private lateinit var offerAdapter: OfferAdapter
@@ -25,7 +27,7 @@ class SearchFragment : Fragment() {
     private lateinit var vacancyRecyclerView: RecyclerView
     private lateinit var vacancyAdapter: VacancyAdapter
 
-    private lateinit var searchViewModel: SearchViewModel
+    private lateinit var mainViewModel: MainViewModel
 
     private lateinit var moreVacanciesButton: Button
 
@@ -35,7 +37,7 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,31 +54,36 @@ class SearchFragment : Fragment() {
         vacancyRecyclerView.adapter = vacancyAdapter
 
         // Инициализация ViewModel, общая для Activity
-        searchViewModel = ViewModelProvider(requireActivity())[SearchViewModel::class.java]
-        searchViewModel.loadData()
+        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
+        mainViewModel.loadData()
 
+        // Инициализация, установка текста кнопки, слушателя клика
         moreVacanciesButton = view.findViewById(R.id.moreVacanciesButton)
 
-        // Установка текста кнопки
-        searchViewModel.moreVacanciesButtonText.observe(viewLifecycleOwner) { text ->
+        mainViewModel.moreVacanciesButtonText.observe(viewLifecycleOwner) { text ->
             moreVacanciesButton.text = text
         }
 
+        moreVacanciesButton.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_matchingVacanciesFragment)
+        }
+
+
         // Подписка на сообщения об ошибках
-        searchViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+        mainViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
             errorMessage?.let {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-                searchViewModel.errorHandled()
+                mainViewModel.errorHandled()
             }
         }
 
         // Подписка на обновления списка офферов
-        searchViewModel.offers.observe(viewLifecycleOwner) { offers ->
+        mainViewModel.offers.observe(viewLifecycleOwner) { offers ->
             offerAdapter.offers = offers
         }
 
         // Подписка на обновления списка вакансий
-        searchViewModel.vacancies.observe(viewLifecycleOwner) { vacancies ->
+        mainViewModel.vacancies.observe(viewLifecycleOwner) { vacancies ->
             vacancyAdapter.vacancies = vacancies.take(3)
         }
 
