@@ -69,9 +69,11 @@ class VacancyAdapter(private val viewModel: MainViewModel) :
                 else R.drawable.ic_favorite_unselected
             )
 
-//            favoriteButton.setOnClickListener {
-//                viewModel.onClickFavorite(vacancy)
-//            }
+            favoriteButton.setOnClickListener {
+                viewModel.onClickFavorite(vacancy)
+                vacancy.isFavorite = !vacancy.isFavorite
+                notifyItemChanged(position)
+            }
         }
     }
 

@@ -47,8 +47,8 @@ class FavoritesFragment : Fragment() {
         }
 
         // Подписка на обновления списка избранных вакансий
-        mainViewModel.vacancies.observe(viewLifecycleOwner) { vacancies ->
-            vacancyAdapter.vacancies = vacancies.filter { it.isFavorite }
+        mainViewModel.favoriteVacancies.observe(viewLifecycleOwner) { favoriteVacancies ->
+            vacancyAdapter.vacancies = favoriteVacancies
         }
     }
 }

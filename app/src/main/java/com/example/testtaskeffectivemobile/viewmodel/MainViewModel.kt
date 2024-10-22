@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.testtaskeffectivemobile.R
 import com.example.testtaskeffectivemobile.data.api.RetrofitClient
+import com.example.testtaskeffectivemobile.data.database.VacancyDatabase
 import com.example.testtaskeffectivemobile.data.model.Offer
 import com.example.testtaskeffectivemobile.data.model.Vacancy
 import kotlinx.coroutines.launch
@@ -15,6 +16,8 @@ import kotlinx.coroutines.launch
 private const val TAG = "MainViewModel"
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
+    private val vacancyDao = VacancyDatabase.getInstance(application).vacancyDao()
+
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> = _errorMessage
 
@@ -30,26 +33,38 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _vacancies = MutableLiveData<List<Vacancy>>()
     val vacancies: LiveData<List<Vacancy>> = _vacancies
 
-    private val _favoriteVacancies = MutableLiveData<List<Vacancy>>()
-    val favoriteVacancies: LiveData<List<Vacancy>> = _favoriteVacancies
-
     private val _favoriteVacanciesCount = MutableLiveData<String?>()
     val favoriteVacanciesCount: LiveData<String?> = _favoriteVacanciesCount
 
-//    fun onClickFavorite(vacancy: Vacancy) {
-//        val updatedVacancies = _vacancies.value?.map {
-//            if (it.id == vacancy.id) {
-//                it.copy(isFavorite = !it.isFavorite)
-//            } else {
-//                it
-//            }
-//        } ?: emptyList()
-//        _vacancies.postValue(updatedVacancies)
-//        _favoriteVacancies.postValue(updatedVacancies.filter { it.isFavorite })
-//
-//        val count = _favoriteVacancies.value?.size?.let { parseVacanciesCount(it) }
-//        _favoriteVacanciesCount.postValue(count)
-//    }
+    val favoriteVacancies = vacancyDao.getAllFavoriteVacancies()
+
+
+    fun insertVacancy(vacancy: Vacancy) {
+        viewModelScope.launch {
+            vacancyDao.insertVacancyToFavorite(vacancy)
+            updateFavoriteVacancyCount()
+        }
+    }
+
+    fun removeVacancy(vacancy: Vacancy) {
+        viewModelScope.launch {
+            vacancyDao.removeVacancyFromFavorite(vacancy.id)
+            updateFavoriteVacancyCount()
+        }
+    }
+
+
+    fun onClickFavorite(vacancy: Vacancy) {
+        viewModelScope.launch {
+            val vacancyFromDb = vacancyDao.getFavoriteVacancy(vacancy.id)
+            if (vacancyFromDb == null) {
+                insertVacancy(vacancy)
+            } else {
+                removeVacancy(vacancy)
+            }
+            _vacancies.value = _vacancies.value
+        }
+    }
 
     fun errorHandled() {
         _errorMessage.value = null
@@ -59,27 +74,44 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             try {
                 val serverResponse = RetrofitClient.instance.loadData()
-                _offers.postValue(serverResponse.offers)
-                _vacancies.postValue(serverResponse.vacancies)
+                val offers = serverResponse.offers
+                val vacancies = serverResponse.vacancies
+
+                _offers.postValue(offers)
+                _vacancies.postValue(vacancies)
+
+                syncFavoritesWithDb(vacancies)
 
                 _moreVacanciesButtonText
-                    .postValue("Ещё ${parseVacanciesCount(serverResponse.vacancies.size)}")
+                    .postValue("Ещё ${parseVacanciesCount(vacancies.size)}")
+                _vacanciesCount.postValue(parseVacanciesCount(vacancies.size))
 
-                _vacanciesCount.postValue(parseVacanciesCount(serverResponse.vacancies.size))
-
-                val favoriteVacanciesCount = parseVacanciesCount(
-                    serverResponse.vacancies.filter { it.isFavorite }.size
+                val favoriteCount = parseVacanciesCount(
+                    vacancies.filter { it.isFavorite }.size
                 )
-                _favoriteVacanciesCount.postValue(favoriteVacanciesCount)
+                _favoriteVacanciesCount.postValue(favoriteCount)
 
             } catch (e: Exception) {
-                _errorMessage
-                    .postValue(getApplication<Application>().getString(R.string.error_loading))
-
+                _errorMessage.postValue(getApplication<Application>().getString(R.string.error_loading))
                 Log.d(TAG, e.toString())
             }
         }
     }
+
+    private fun updateFavoriteVacancyCount() {
+        val favoriteCount = favoriteVacancies.value?.size?.let { parseVacanciesCount(it) }
+        _favoriteVacanciesCount.postValue(favoriteCount)
+    }
+
+    private suspend fun syncFavoritesWithDb(vacancies: List<Vacancy>) {
+        vacancies.forEach { vacancy ->
+            val vacancyFromDb = vacancyDao.getFavoriteVacancy(vacancy.id)
+            if (vacancy.isFavorite && vacancyFromDb == null) {
+                insertVacancy(vacancy)
+            }
+        }
+    }
+
 
     private fun parseVacanciesCount(size: Int): String {
         val wordForm = when {

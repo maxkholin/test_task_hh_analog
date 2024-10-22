@@ -31,6 +31,12 @@ class MainFragment : Fragment() {
 
     private lateinit var moreVacanciesButton: Button
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
+        mainViewModel.loadData()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,10 +47,6 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Инициализация ViewModel, общая для Activity
-        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-        mainViewModel.loadData()
 
         // Настройка RecyclerView для офферов
         offersRecyclerView = view.findViewById(R.id.offersRecyclerView)
