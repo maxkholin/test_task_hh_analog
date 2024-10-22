@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.MatchingVacanciesFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="16dp"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/search_input_layout"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:layout_marginEnd="8dp"
+
+                android:enabled="false"
+                android:hint="@string/match_search_hint"
+                app:layout_constraintEnd_toStartOf="@id/filter_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:startIconDrawable="@drawable/ic_arrow_back">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/search_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/background_dark_grey"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/backArrowButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_arrow_back"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="4dp"
+                app:layout_constraintBottom_toBottomOf="@id/search_input_layout"
+                app:layout_constraintStart_toStartOf="@id/search_input_layout"
+                app:layout_constraintTop_toTopOf="@id/search_input_layout" />
+
+            <ImageButton
+                android:id="@+id/filter_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/background_dark_grey"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_filter_button"
+                app:layout_constraintBottom_toBottomOf="@id/search_input_layout"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/search_input_layout"
+                tools:text="145 вакансий" />
+
+            <ImageView
+                android:id="@+id/sortingByButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_sorting_by"
+                app:layout_constraintBottom_toBottomOf="@id/matchingTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/matchingTextView" />
+
+            <TextView
+                android:id="@+id/matchingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/special_blue"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@id/title"
+                app:layout_constraintTop_toTopOf="@id/title"
+                app:layout_constraintEnd_toStartOf="@id/sortingByButton"
+                app:layout_constraintTop_toBottomOf="@id/search_input_layout"
+                android:text="@string/by_matching" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/vacanciesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                tools:itemCount="3"
+                tools:listitem="@layout/vacancy_item" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>

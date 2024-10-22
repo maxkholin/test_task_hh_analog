@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.testtaskeffectivemobile.ui.fragments.MainFragment"
+        android:label="@string/search"
+        tools:layout="@layout/fragment_main" />
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.testtaskeffectivemobile.ui.fragments.FavoritesFragment"
+        android:label="@string/favorites"
+        tools:layout="@layout/fragment_favorites" />
+
+    <fragment
+        android:id="@+id/responsesFragment"
+        android:name="com.example.testtaskeffectivemobile.ui.fragments.ResponsesFragment"
+        android:label="@string/responses"
+        tools:layout="@layout/fragment_responses" />
+
+    <fragment
+        android:id="@+id/messagesFragment"
+        android:name="com.example.testtaskeffectivemobile.ui.fragments.MessagesFragment"
+        android:label="@string/messages"
+        tools:layout="@layout/fragment_messages" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.testtaskeffectivemobile.ui.fragments.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/matchingVacanciesFragment"
+        android:name="com.example.testtaskeffectivemobile.ui.fragments.MatchingVacanciesFragment"
+        android:label="@string/more_vacancies"
+        tools:layout="@layout/fragment_matching_vacancies"
+        />
+
+    <action
+        android:id="@+id/action_mainFragment_to_matchingVacanciesFragment"
+        app:destination="@id/matchingVacanciesFragment" />
+
+</navigation>

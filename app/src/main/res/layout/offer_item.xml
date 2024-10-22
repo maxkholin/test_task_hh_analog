@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="150dp"
+    android:layout_height="144dp"
+    app:cardBackgroundColor="@color/dark_grey"
+    app:cardCornerRadius="12dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/offerIconImageView"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:contentDescription="@null"
+            android:padding="4dp"
+            tools:background="@drawable/rounded_background_green"
+            tools:src="@android:drawable/ic_dialog_map" />
+
+        <TextView
+            android:id="@+id/offerTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:maxLines="3"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            tools:text="Откликнитесь еще на 6 вакансий" />
+
+        <TextView
+            android:id="@+id/offerButtonText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:maxLines="1"
+            android:textColor="@color/green"
+            tools:text="Поднять" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
