@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testtaskeffectivemobile.R
 import com.example.testtaskeffectivemobile.ui.adapters.VacancyAdapter
@@ -20,7 +23,7 @@ class MatchingVacanciesFragment : Fragment() {
     private lateinit var mainViewModel: MainViewModel
 
     private lateinit var vacanciesCount: TextView
-//    private lateinit var
+    private lateinit var backArrowButton: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +51,13 @@ class MatchingVacanciesFragment : Fragment() {
 
         mainViewModel.vacanciesCount.observe(viewLifecycleOwner) { text ->
             vacanciesCount.text = text
+        }
+
+        // Инициализация и установка слушителя клика на кнопку назад
+        backArrowButton = view.findViewById(R.id.backArrowButton)
+
+        backArrowButton.setOnClickListener {
+            findNavController().navigateUp()
         }
 
         // Подписка на обновления списка вакансий
