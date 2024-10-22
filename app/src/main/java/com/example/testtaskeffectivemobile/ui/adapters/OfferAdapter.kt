@@ -78,11 +78,11 @@ class OfferAdapter : RecyclerView.Adapter<OfferAdapter.OfferViewHolder>() {
     private fun getBackgroundColor(imageId: String): Int {
         return when (imageId) {
             OffersImageId.temporary_job.name,
-            OffersImageId.level_up_resume.name ->  R.drawable.rounded_green_background
+            OffersImageId.level_up_resume.name ->  R.drawable.rounded_background_green
 
-            OffersImageId.near_vacancies.name -> R.drawable.rounded_blue_background
+            OffersImageId.near_vacancies.name -> R.drawable.rounded_background_blue
 
-            else -> R.drawable.rounded_blue_background
+            else -> R.drawable.rounded_background_blue
         }
     }
 
