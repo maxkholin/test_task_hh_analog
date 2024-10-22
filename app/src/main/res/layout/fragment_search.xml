@@ -8,73 +8,82 @@
     android:layout_marginStart="16dp"
     tools:context=".ui.fragments.SearchFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/search_input_layout"
-            android:layout_width="0dp"
-            android:layout_height="54dp"
-            android:layout_marginEnd="8dp"
-            android:enabled="false"
-            android:hint="@string/search_hint"
-            app:layout_constraintEnd_toStartOf="@id/filter_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:startIconDrawable="@drawable/ic_search_unselected">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/search_input"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/search_input_layout"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:layout_marginEnd="8dp"
+                android:enabled="false"
+                android:hint="@string/search_hint"
+                app:layout_constraintEnd_toStartOf="@id/filter_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:startIconDrawable="@drawable/ic_search_unselected">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/search_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/elements_background"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/filter_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/elements_background"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:contentDescription="@null"
+                android:src="@drawable/ic_filter_button2"
+                app:layout_constraintBottom_toBottomOf="@id/search_input_layout"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-        <ImageButton
-            android:id="@+id/filter_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/elements_background"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_filter_button2"
-            app:layout_constraintBottom_toBottomOf="@id/search_input_layout"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/offersRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/search_input_layout"
+                tools:itemCount="5"
+                tools:listitem="@layout/offer_item" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/offersRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/search_input_layout"
-            tools:itemCount="5"
-            tools:listitem="@layout/offer_item" />
+            <TextView
+                android:id="@+id/vacanciesForYouTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/vacancies_for_you"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/offersRecyclerView" />
 
-        <TextView
-            android:id="@+id/vacanciesForYouTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/vacancies_for_you"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/offersRecyclerView" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/vacanciesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/vacanciesForYouTextView"
+                tools:itemCount="3"
+                tools:listitem="@layout/vacancy_item" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/vacanciesRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_marginEnd="8dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/vacanciesForYouTextView"
-            tools:itemCount="3"
-            tools:listitem="@layout/vacancy_item" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
 
 </FrameLayout>

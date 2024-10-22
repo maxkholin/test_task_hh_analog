@@ -13,13 +13,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.testtaskeffectivemobile.R
 import com.example.testtaskeffectivemobile.data.api.RetrofitClient
 import com.example.testtaskeffectivemobile.data.model.Offer
+import com.example.testtaskeffectivemobile.data.model.Vacancy
 import com.example.testtaskeffectivemobile.ui.adapters.OfferAdapter
+import com.example.testtaskeffectivemobile.ui.adapters.VacancyAdapter
 import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
 
     private lateinit var offersRecyclerView: RecyclerView
     private lateinit var offerAdapter: OfferAdapter
+
+    private lateinit var vacancyRecyclerView: RecyclerView
+    private lateinit var vacancyAdapter: VacancyAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,11 +42,20 @@ class SearchFragment : Fragment() {
         offerAdapter = OfferAdapter()
         offersRecyclerView.adapter = offerAdapter
 
+        vacancyRecyclerView = view.findViewById(R.id.vacanciesRecyclerView)
+        vacancyAdapter = VacancyAdapter()
+        vacancyRecyclerView.adapter = vacancyAdapter
+
         var testOffers: List<Offer>
+        var testVacancies: List<Vacancy>
         lifecycleScope.launch {
-            testOffers = RetrofitClient.instance.loadData().offers
+            val dataFromApi = RetrofitClient.instance.loadData()
+            testOffers = dataFromApi.offers
+            testVacancies = dataFromApi.vacancies
             Log.d("SearchFragment", testOffers.toString())
+            Log.d("SearchFragment", testVacancies.toString())
             offerAdapter.offers = testOffers
+            vacancyAdapter.vacancies = testVacancies.take(3)
         }
 
         offerAdapter.setOnOfferClickListener(object : OfferAdapter.OnOfferClickListener {

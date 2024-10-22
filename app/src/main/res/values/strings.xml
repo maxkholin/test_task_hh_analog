@@ -10,4 +10,6 @@
     <string name="search_hint">Должность, ключевые слова</string>
     <string name="vacancies_for_you">Вакансии для вас</string>
     <string name="respond">Откликнуться</string>
+    <string name="people_watching_template">Сейчас просматривает %s</string>
+    <string name="date_template">Опубликовано %s</string>
 </resources>
