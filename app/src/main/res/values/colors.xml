@@ -3,8 +3,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey3">#858688</color>
-    <color name="dark_grey_elements_background">#313234</color>
-    <color name="special_blue_menu_icons_selected">#2B7EFE</color>
-    <color name="green_offer_icon_background">#4CB24E</color>
-    <color name="special_dark_blue_offer_icon_background">#00427D</color>
+    <color name="dark_grey">#313234</color>
+    <color name="special_blue">#2B7EFE</color>
+    <color name="green">#4CB24E</color>
+    <color name="special_dark_blue">#00427D</color>
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/dark_grey_elements_background"
+    app:cardBackgroundColor="@color/dark_grey"
     app:cardCornerRadius="12dp"
 
     app:cardUseCompatPadding="true">
@@ -27,7 +27,7 @@
             android:id="@+id/peopleLookingTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/green_offer_icon_background"
+            android:textColor="@color/green"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Сейчас просматривает 100 человек" />
@@ -102,8 +102,9 @@
             android:id="@+id/respondButton"
             android:layout_width="match_parent"
             android:layout_height="42dp"
+            android:textSize="14sp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/rounded_button"
+            android:background="@drawable/rounded_button_respond_green"
             android:text="@string/respond"
             app:layout_constraintTop_toBottomOf="@id/dateTextView" />
 

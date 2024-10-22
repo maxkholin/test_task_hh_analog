@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="150dp"
     android:layout_height="144dp"
-    app:cardBackgroundColor="@color/dark_grey_elements_background"
+    app:cardBackgroundColor="@color/dark_grey"
     app:cardCornerRadius="12dp"
     app:cardUseCompatPadding="true">
 
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:maxLines="1"
-            android:textColor="@color/green_offer_icon_background"
+            android:textColor="@color/green"
             tools:text="Поднять" />
 
     </LinearLayout>
