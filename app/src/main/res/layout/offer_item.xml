@@ -20,7 +20,7 @@
             android:layout_height="36dp"
             android:contentDescription="@null"
             android:padding="4dp"
-            tools:background="@drawable/rounded_green_background"
+            tools:background="@drawable/rounded_background_green"
             tools:src="@android:drawable/ic_dialog_map" />
 
         <TextView
