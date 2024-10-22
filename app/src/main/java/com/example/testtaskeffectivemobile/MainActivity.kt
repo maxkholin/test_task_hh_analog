@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         }
         initAndSetupNavigation()
 
-
     }
 
     private fun initAndSetupNavigation() {
@@ -46,5 +45,4 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setupWithNavController(navController)
 
     }
-
 }
