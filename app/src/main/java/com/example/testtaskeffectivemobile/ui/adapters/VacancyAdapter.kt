@@ -54,26 +54,23 @@ class VacancyAdapter(private val viewModel: MainViewModel) :
             peopleLookingTextView.text = peopleWatching
 
             vacancyTitleTextView.text = vacancy.title
-
             townTextView.text = vacancy.address?.town
-
             companyTextView.text = vacancy.company
-
             experienceTextView.text = vacancy.experience?.previewText
 
             val date = vacancy.publishedDate?.let { parseDate(it) }
             dateTextView.text = date
-
-            favoriteButton.setImageResource(
-                if (vacancy.isFavorite) R.drawable.ic_favorite_selected
-                else R.drawable.ic_favorite_unselected
-            )
 
             favoriteButton.setOnClickListener {
                 viewModel.onClickFavorite(vacancy)
                 vacancy.isFavorite = !vacancy.isFavorite
                 notifyItemChanged(position)
             }
+
+            favoriteButton.setImageResource(
+                if (vacancy.isFavorite) R.drawable.ic_favorite_selected
+                else R.drawable.ic_favorite_unselected
+            )
         }
     }
 
