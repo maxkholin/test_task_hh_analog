@@ -1,11 +1,15 @@
 package com.example.testtaskeffectivemobile
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         initAndSetupNavigation()
 
 
-
     }
 
     private fun initAndSetupNavigation() {
@@ -34,15 +37,12 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-//        navController = try {
-//            findNavController(R.id.nav_host_fragment)
-//        } catch (e: Exception) {
-//            Log.e("NavigationSetup", "NavController initialization failed: ${e.message}")
-//            throw e
-//        }
-//        // Настройка NavController с BottomNavigationView
-//        bottomNavigationView.setupWithNavController(navController)
+        try {
+            navController = findNavController(R.id.nav_host_fragment)
+            // Настройка NavController с BottomNavigationView
+            bottomNavigationView.setupWithNavController(navController)
+        } catch (e: Exception) {
+            Log.e("NavigationSetup", "NavController initialization failed: ${e.message}")
+        }
     }
-
-
 }

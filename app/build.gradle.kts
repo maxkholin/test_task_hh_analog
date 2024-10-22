@@ -48,8 +48,9 @@ dependencies {
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
     // Navigation Component
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.1")
-    implementation ("androidx.navigation:navigation-ui-ktx:2.7.1")
+    implementation (libs.androidx.navigation.fragment.ktx.v283)
+    implementation (libs.androidx.navigation.ui.ktx.v283)
+
     // Material Components
     implementation (libs.material.v190)
     // ViewModel and LiveData
