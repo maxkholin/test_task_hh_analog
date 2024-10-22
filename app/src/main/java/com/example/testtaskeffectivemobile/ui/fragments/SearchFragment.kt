@@ -77,7 +77,7 @@ class SearchFragment : Fragment() {
 
         // Подписка на обновления списка вакансий
         searchViewModel.vacancies.observe(viewLifecycleOwner) { vacancies ->
-            vacancyAdapter.vacancies = vacancies
+            vacancyAdapter.vacancies = vacancies.take(3)
         }
 
         // Обработка кликов на офферы
