@@ -12,4 +12,5 @@
     <string name="respond">Откликнуться</string>
     <string name="people_watching_template">Сейчас просматривает %s</string>
     <string name="date_template">Опубликовано %s</string>
+    <string name="error_loading">Не удалось загрузить данные, попробуйте позже</string>
 </resources>
