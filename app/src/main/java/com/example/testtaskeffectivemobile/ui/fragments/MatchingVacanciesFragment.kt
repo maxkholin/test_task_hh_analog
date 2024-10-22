@@ -18,9 +18,7 @@ class MatchingVacanciesFragment : Fragment() {
 
     private lateinit var vacancyRecyclerView: RecyclerView
     private lateinit var vacancyAdapter: VacancyAdapter
-
     private lateinit var mainViewModel: MainViewModel
-
     private lateinit var vacanciesCount: TextView
     private lateinit var backArrowButton: ImageView
 
@@ -34,33 +32,42 @@ class MatchingVacanciesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Инициализация ViewModel
         mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
-        // Настройка RecyclerView для вакансий
+        setupRecyclerView(view)
+        setupVacanciesCount(view)
+        setupBackArrowButton(view)
+
+        observeVacancies()
+    }
+
+    /** Настраивает RecyclerView для отображения вакансий. */
+    private fun setupRecyclerView(view: View) {
         vacancyRecyclerView = view.findViewById(R.id.vacanciesRecyclerView)
         vacancyAdapter = VacancyAdapter(mainViewModel)
         vacancyRecyclerView.adapter = vacancyAdapter
+    }
 
-
-        // Инициализация, установка текста кнопки
+    /** Настраивает отображение количества вакансий. */
+    private fun setupVacanciesCount(view: View) {
         vacanciesCount = view.findViewById(R.id.title)
-
         mainViewModel.vacanciesCount.observe(viewLifecycleOwner) { text ->
             vacanciesCount.text = text
         }
+    }
 
-        // Инициализация и установка слушителя клика на кнопку назад
+    /** Настраивает кнопку "назад". */
+    private fun setupBackArrowButton(view: View) {
         backArrowButton = view.findViewById(R.id.backArrowButton)
-
         backArrowButton.setOnClickListener {
             findNavController().navigateUp()
         }
+    }
 
-        // Подписка на обновления списка вакансий
+    /** Подписка на обновления списка вакансий. */
+    private fun observeVacancies() {
         mainViewModel.vacancies.observe(viewLifecycleOwner) { vacancies ->
             vacancyAdapter.vacancies = vacancies
         }
-
     }
 }
