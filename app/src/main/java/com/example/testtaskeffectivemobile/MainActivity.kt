@@ -7,8 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -37,12 +36,14 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        try {
-            navController = findNavController(R.id.nav_host_fragment)
-            // Настройка NavController с BottomNavigationView
-            bottomNavigationView.setupWithNavController(navController)
-        } catch (e: Exception) {
-            Log.e("NavigationSetup", "NavController initialization failed: ${e.message}")
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+        if (navHostFragment != null) {
+            navController = navHostFragment.findNavController() // Используем метод для Fragment
+        } else {
+            Log.e("NavigationSetup", "NavHostFragment is null")
         }
+
+        bottomNavigationView.setupWithNavController(navController)
+
     }
 }
